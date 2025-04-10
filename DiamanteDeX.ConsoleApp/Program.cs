@@ -2,12 +2,34 @@
 {
 	internal class Program
 	{
+		// Função principal para coordenar o fluxo
 		static void Main(string[] args)
 		{
-			ExibirCabeçalho();
-			int numeroValidado = ValidarNumeroImpar();
-			DesenharDiamante(numeroValidado);
+			while (true)
+			{ 
+				ExibirCabeçalho();
+				int numeroValidado = ValidarNumeroImpar();
+				DesenharDiamante(numeroValidado);
+
+				// Estrutura de verificação para fazer um novo triângulo 
+				while (true)
+				{
+					Console.Write("\nDeseja fazer um novo triângulo? (s/n): ");
+					string valorNovoTriangulo = Console.ReadLine();
+
+					if (valorNovoTriangulo.ToLower() == "s")
+						break;
+					else if (valorNovoTriangulo.ToLower() == "n")
+						return;
+					else 
+					{
+						NovaAba();
+						Console.WriteLine("\nERRO: Digite um valor válido!");
+					}
+				}
+			}
 		}
+
 
 		// Função para gerar o cabeçalho
 		static void ExibirCabeçalho()
@@ -19,12 +41,14 @@
 			Console.WriteLine("\n");
 		}
 
+
 		// Função para limpar tela e exibir o cabeçalho novamente (efeito nova aba)
 		static void NovaAba()
 		{
 			Console.Clear();
 			ExibirCabeçalho();
 		}
+
 
 		// Função de validação de valores e interação do usuário
 		static int ValidarNumeroImpar()
@@ -56,9 +80,11 @@
 			}
 		}
 
+
 		// Função para desenhar o diamante
 		static void DesenharDiamante(int tamanhoDiamante)
 		{
+
 			NovaAba();
 			Console.WriteLine($"Diamante de tamanho: {tamanhoDiamante}\n");
 
@@ -83,6 +109,7 @@
 				string linhaDiamante = new string(' ', espaçosNecessarios) + new string('X', quantidadeDeX);
 				Console.WriteLine(linhaDiamante);
 			}
+
 			Console.ReadLine();
 		}
 	}
