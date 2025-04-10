@@ -58,21 +58,29 @@
 				NovaAba();
 
 				Console.Write("Digite um número ímpar: ");
-				int numeroDigitado = Convert.ToInt32(Console.ReadLine()); ;
 
-				if (numeroDigitado == 0)
+				try
 				{
-					Console.WriteLine("\nERRO: Digite um valor válido!");
-				}
-				else if (numeroDigitado % 2 == 1)
+					int numeroDigitado = Convert.ToInt32(Console.ReadLine()); ;
+
+                    if (numeroDigitado < 3)
+                    {
+                        Console.WriteLine("\nERRO: Digite um valor válido!");
+                    }
+                    else if (numeroDigitado % 2 == 1)
+                    {
+                        Console.WriteLine($">{numeroDigitado}");
+                        return numeroDigitado;
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nERRO: Digite um valor ímpar e positivo!");
+                    }
+
+                } catch
 				{
-					Console.WriteLine($">{numeroDigitado}");
-					return numeroDigitado;
-				}
-				else
-				{
-					Console.WriteLine("\nERRO: Digite um valor ímpar e positivo!");
-				}
+                    Console.WriteLine("\nERRO: Digite um valor válido!");
+                }
 
 				Console.WriteLine("Pressione ENTER para tentar novamente...");
 				Console.ReadLine();
@@ -109,8 +117,6 @@
 				string linhaDiamante = new string(' ', espaçosNecessarios) + new string('X', quantidadeDeX);
 				Console.WriteLine(linhaDiamante);
 			}
-
-			Console.ReadLine();
 		}
 	}
 }
