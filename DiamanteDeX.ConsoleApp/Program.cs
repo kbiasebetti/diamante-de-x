@@ -1,58 +1,89 @@
 ﻿namespace DiamanteDeX.ConsoleApp
 {
-    internal class Program
-    {
-        static void Main(string[] args)
-        {
-            ExibirCabeçalho();
-            ValidarNumeroImpar();
-        }
+	internal class Program
+	{
+		static void Main(string[] args)
+		{
+			ExibirCabeçalho();
+			int numeroValidado = ValidarNumeroImpar();
+			DesenharDiamante(numeroValidado);
+		}
 
-        // Função para gerar o cabeçalho
-        static void ExibirCabeçalho()
-        {
-            Console.WriteLine("------------------------------------------------------");
-            Console.WriteLine("|               Projeto Diamante de X                |");
-            Console.WriteLine("| Digite um número ímpar para desenhar um X na tela! |");
-            Console.WriteLine("------------------------------------------------------");
-            Console.WriteLine("\n");
-        }
+		// Função para gerar o cabeçalho
+		static void ExibirCabeçalho()
+		{
+			Console.WriteLine("------------------------------------------------------");
+			Console.WriteLine("|               Projeto Diamante de X                |");
+			Console.WriteLine("| Digite um número ímpar para desenhar um X na tela! |");
+			Console.WriteLine("------------------------------------------------------");
+			Console.WriteLine("\n");
+		}
 
-        // Função para limpar tela e exibir o cabeçalho novamente (efeito nova aba)
-        static void NovaAba()
-        {
-            Console.Clear();
-            ExibirCabeçalho();
-        }
+		// Função para limpar tela e exibir o cabeçalho novamente (efeito nova aba)
+		static void NovaAba()
+		{
+			Console.Clear();
+			ExibirCabeçalho();
+		}
 
-        static int ValidarNumeroImpar()
-        {
+		// Função de validação de valores e interação do usuário
+		static int ValidarNumeroImpar()
+		{
+			while (true)
+			{
+				NovaAba();
 
-            while (true)
-            {
-                NovaAba();
+				Console.Write("Digite um número ímpar: ");
+				int numeroDigitado = Convert.ToInt32(Console.ReadLine()); ;
 
-                Console.Write("Digite um número ímpar: ");
-                int numeroDigitado = Convert.ToInt32(Console.ReadLine()); ;
+				if (numeroDigitado == 0)
+				{
+					Console.WriteLine("\nERRO: Digite um valor válido!");
+				}
+				else if (numeroDigitado % 2 == 1)
+				{
+					Console.WriteLine($">{numeroDigitado}");
+					return numeroDigitado;
+				}
+				else
+				{
+					Console.WriteLine("\nERRO: Digite um valor ímpar e positivo!");
+				}
 
-                if (numeroDigitado == 0)
-                {
-                    Console.WriteLine("\nERRO: Digite um valor válido!");
-                }
-                else if (numeroDigitado % 2 == 1)
-                {
-                    Console.WriteLine($"> {numeroDigitado}");
-                    return numeroDigitado;
-                }
-                else
-                {
-                    Console.WriteLine("\nERRO: Digite um valor ímpar e positivo!");
-                }
+				Console.WriteLine("Pressione ENTER para tentar novamente...");
+				Console.ReadLine();
+				continue;
+			}
+		}
 
-                Console.WriteLine("Pressione ENTER para tentar novamente...");
-                Console.ReadLine();
-                continue;
-            }
-        }
-    }
+		// Função para desenhar o diamante
+		static void DesenharDiamante(int tamanhoDiamante)
+		{
+			NovaAba();
+			Console.WriteLine($"Diamante de tamanho: {tamanhoDiamante}\n");
+
+			int centroDiamante = tamanhoDiamante / 2;
+
+			// Triângulo para a parte de cima (com a linha do meio)
+			for (int i = 0; i <= centroDiamante; i++)
+			{
+				int espacosNecessarios = centroDiamante - i;
+				int quantidadeDeX = 2 * i + 1;
+
+				string linhaDiamante = new string(' ', espacosNecessarios) + new string('X', quantidadeDeX);
+				Console.WriteLine(linhaDiamante);
+			}
+
+			// Triângulo para a parte de baixo 
+			for (int i = centroDiamante - 1; i >= 0; i--)
+			{
+				int espaçosNecessarios = centroDiamante - i;
+				int quantidadeDeX = 2 * i + 1;
+
+				string linhaDiamante = new string(' ', espaçosNecessarios) + new string('X', quantidadeDeX);
+				Console.WriteLine(linhaDiamante);
+			}
+			Console.ReadLine();
+		}
+	}
 }
